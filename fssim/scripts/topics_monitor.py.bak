@@ -107,7 +107,7 @@ class MonitorTopics():
             try:
                 rate.sleep()
             except:
-                print("ROSCORE has been killed during sleep")
+                print "ROSCORE has been killed during sleep"
 
     def check_topics_hz(self, topic_config, precision=10.0):
         success = True

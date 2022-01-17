@@ -47,7 +47,7 @@ class Command:
         if env is None:
             env = {}
 
-        for key, value in env.items():
+        for key, value in env.iteritems():
             self._env[key] = value
 
     def run(self):
@@ -70,7 +70,7 @@ class Command:
             try:
                 os.kill(self._popen.pid, signal.SIGINT)
             except OSError:
-                print("Process does not exist")
+                print "Process does not exist"
                 return
             time.sleep(0.5)
             if self._popen:
@@ -87,4 +87,4 @@ class Command:
                         print(status)
                     self._popen.poll()
         else:
-            print("ERROR Popen is NONE")
+            print "ERROR Popen is NONE"

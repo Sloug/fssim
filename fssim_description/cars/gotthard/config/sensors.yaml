@@ -29,7 +29,7 @@ stream_track:
 
 sensors:
   lidar:
-    enabled: false
+    enabled: true
     topic: lidar/raw
     pos:
       x: 0.75

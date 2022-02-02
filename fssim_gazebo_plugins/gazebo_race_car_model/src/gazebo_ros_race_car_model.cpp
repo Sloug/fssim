@@ -66,7 +66,8 @@ void RaceCarModelPlugin::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf) {
 
     this->dataPtr->worldControlPub = this->dataPtr->gznode->Advertise<msgs::WorldControl>("~/world_control");
 
-    this->dataPtr->lastSimTime = this->dataPtr->world->GetSimTime();
+    //this->dataPtr->lastSimTime = this->dataPtr->world->GetSimTime();
+    this->dataPtr->lastSimTime = this->dataPtr->world->SimTime();
 }
 
 void RaceCarModelPlugin::Reset() {
@@ -78,9 +79,11 @@ void RaceCarModelPlugin::update() {
 
     publishInfo();
 
-    common::Time curTime = this->dataPtr->world->GetSimTime();
+    //common::Time curTime = this->dataPtr->world->GetSimTime();
+    common::Time curTime = this->dataPtr->world->SimTime();
     double       dt      = 0.0;
-    if (!isLoopTime(this->dataPtr->world->GetSimTime(), dt)) {
+    //if (!isLoopTime(this->dataPtr->world->GetSimTime(), dt)) {
+    if (!isLoopTime(this->dataPtr->world->SimTime(), dt)) {
         return;
     }
 
@@ -90,7 +93,8 @@ void RaceCarModelPlugin::update() {
 }
 
 void RaceCarModelPlugin::publishInfo() {
-    this->dataPtr->vehicle->publish(this->dataPtr->world->GetSimTime().Double());
+    //this->dataPtr->vehicle->publish(this->dataPtr->world->GetSimTime().Double());
+    this->dataPtr->vehicle->publish(this->dataPtr->world->SimTime().Double());
 }
 
 bool RaceCarModelPlugin::isLoopTime(const common::Time &time, double &dt) {

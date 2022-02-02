@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<sdf version="1.4">
+<sdf version="1.6">
   <model name="some track">
     <include>
       <uri>model://fssim_gazebo/models/cone_blue</uri>

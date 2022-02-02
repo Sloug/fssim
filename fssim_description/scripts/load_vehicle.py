@@ -18,8 +18,11 @@ def load_robot_description():
     print model_filepath
 
     try:
-        command_string = "rosrun xacro xacro --inorder {} robot_name:='{}' sensors_config_file:='{}' car_config_file:='{}' car_dimensions_file:='{}".format(model_filepath, 
-            robot_name, sensors_config_file, car_config_file, car_dimensions_file)
+        command_string = "rosrun xacro xacro --inorder {} robot_name:='{}' sensors_config_file:='{}' car_config_file:='{}' car_dimensions_file:='{}".format( model_filepath, 
+                          robot_name, 
+                          sensors_config_file, 
+                          car_config_file, 
+                          car_dimensions_file)
         robot_description = subprocess.check_output(command_string, shell=True, stderr=subprocess.STDOUT)   
     except subprocess.CalledProcessError as process_error:
         rospy.logfatal('Failed to run xacro command with error: \n%s', process_error.output)

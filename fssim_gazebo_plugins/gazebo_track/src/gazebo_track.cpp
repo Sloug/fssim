@@ -55,13 +55,16 @@ class TrackStreamer : public ModelPlugin {
     };
 
     Point2d toPoint2d(const boost::shared_ptr<gazebo::physics::Entity> &e) const {
-        return {e->GetWorldPose().pos.x, e->GetWorldPose().pos.y};
+        //return {e->GetWorldPose().pos.x, e->GetWorldPose().pos.y};
+        return {e->WorldPose().Pos().X(), e->WorldPose().Pos().Y()};
     }
 
     geometry_msgs::Point toGeomPoint(const boost::shared_ptr<gazebo::physics::Entity> &e) const {
         geometry_msgs::Point p;
-        p.x = e->GetWorldPose().pos.x;
-        p.y = e->GetWorldPose().pos.y;
+        //p.x = e->GetWorldPose().pos.x;
+        //p.y = e->GetWorldPose().pos.y;
+        p.x = e->WorldPose().Pos().X();
+        p.y = e->WorldPose().Pos().Y();
         p.z = 0.0;
         return p;
     }
@@ -118,7 +121,8 @@ class TrackStreamer : public ModelPlugin {
             nh.advertise<visualization_msgs::MarkerArray>(_sdf->Get<std::string>("markers") + "/markers", 1, true);
         pub_custome_track = nh.advertise<fssim_common::Track>(_sdf->Get<std::string>("markers"), 1, true);
 
-        const auto model                                          = _parent->GetWorld()->GetModel("track");
+        //const auto model = _parent->GetWorld()->GetModel("track");
+        const auto model = _parent->GetWorld()->ModelByName("track");
 
         std::vector<boost::shared_ptr<gazebo::physics::Entity>> left;
         std::vector<boost::shared_ptr<gazebo::physics::Entity>> right;
@@ -126,18 +130,25 @@ class TrackStreamer : public ModelPlugin {
         std::vector<boost::shared_ptr<gazebo::physics::Entity>> orange_big;
         std::vector<boost::shared_ptr<gazebo::physics::Entity>> tk_device_start;
         std::vector<boost::shared_ptr<gazebo::physics::Entity>> tk_device_end;
-        for (unsigned int                                       i = 0; i < model->GetChildCount(); ++i) {
+        for (unsigned int  i = 0; i < model->GetChildCount(); ++i) {
             const auto child  = model->GetChild(i);
             const auto entity = boost::dynamic_pointer_cast<gazebo::physics::Entity>(child);
             const auto name   = entity->GetName();
-            if (name == "cone_left::link") {
+
+            //if (name == "cone_left::link") {
+            if (name.find("cone_left_") != std::string::npos) {
                 left.push_back(entity);
-            } else if (name == "cone_right::link") {
+            //} else if (name == "cone_right::link") {
+            } else if (name.find("cone_right_") != std::string::npos) {
                 right.push_back(entity);
-            } else if (name == "cone_orange::link") {
-                orange.push_back(entity);
-            } else if (name == "cone_orange_big::link") {
+            //} else if (name == "cone_orange::link") {
+            //    orange.push_back(entity);
+            //} else if (name == "cone_orange_big::link") {
+            } else if (name.find("cone_orange_big_") != std::string::npos) {
                 orange_big.push_back(entity);
+            //} else if (name == "cone_orange::link") {
+            } else if (name.find("cone_orange_") != std::string::npos) {
+                orange.push_back(entity);
             } else if (name.find("tk_device") != std::string::npos) {
                 if (name.find("0") != std::string::npos or name.find("1") != std::string::npos) {
                     tk_device_start.push_back(entity);

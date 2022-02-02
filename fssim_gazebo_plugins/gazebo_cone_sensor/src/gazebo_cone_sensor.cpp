@@ -52,7 +52,7 @@ void ConeSensor::Load(physics::ModelPtr _parent, sdf::ElementPtr _sdf) {
     char *argv = nullptr;
     ros::init(argc, &argv, _sdf->Get<std::string>("node_name"));
 
-    ROS_INFO("Loading ConeSensor");
+    ROS_INFO("GAZEBO: Loading ConeSensor");
     model_ = _parent;
 
     gznode = transport::NodePtr(new transport::Node());
@@ -62,10 +62,12 @@ void ConeSensor::Load(physics::ModelPtr _parent, sdf::ElementPtr _sdf) {
     track_.load(_parent, _sdf);
     dt_required_ = 1.0 / track_.getRate();
 }
+
 void ConeSensor::Update() {
     std::lock_guard<std::mutex> lock(mutex);
 
-    common::Time cur_time = model_->GetWorld()->GetSimTime();
+    //common::Time cur_time = model_->GetWorld()->GetSimTime();
+    common::Time cur_time = model_->GetWorld()->SimTime();
     double       dt;
 
     if (!isLoopTime(cur_time, dt)) {

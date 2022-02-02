@@ -2,6 +2,6 @@
 <model>
   <name>track</name>
   <version>1.0</version>
-  <sdf version="1.4">$(arg track_name)</sdf>
+  <sdf version="1.6">$(arg track_name)</sdf>
   <description>random track</description>
 </model>

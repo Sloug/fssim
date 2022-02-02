@@ -29,7 +29,9 @@ include_directories(include
         ${GAZEBO_INCLUDE_DIRS}
         ${SDFormat_INCLUDE_DIRS}
         ${OGRE_INCLUDE_DIRS}
-        ${Boost_INCLUDE_DIRS})
+        ${Boost_INCLUDE_DIRS}
+	.
+	)
 
 find_package(catkin REQUIRED COMPONENTS
         gazebo_msgs
@@ -39,9 +41,10 @@ find_package(catkin REQUIRED COMPONENTS
         nav_msgs
         tf
         pcl_ros
-        visualization_msgs)
+        visualization_msgs
+	)
 
-find_package(gazebo 7 REQUIRED)
+find_package(gazebo 9 REQUIRED)
 find_package(PCL REQUIRED)
 find_package(Boost REQUIRED COMPONENTS thread)
 

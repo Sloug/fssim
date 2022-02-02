@@ -449,7 +449,7 @@ if __name__ == '__main__':
     import rosgraph
     import socket
 
-    parser = argparse.ArgumentParser(description = 'Process some integers.')
+    parser = argparse.ArgumentParser(description = 'Process some arguments.')
     parser.add_argument("--config", dest = "config", metavar = "FILE", help = "Config YAML file",
                         default = rospkg.RosPack().get_path('fssim') + '/config/simulation.yaml')
     parser.add_argument("--output", dest = "output", metavar = "FOLDER", help = "Output YAML file")

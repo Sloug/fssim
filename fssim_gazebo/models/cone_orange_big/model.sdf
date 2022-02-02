@@ -1,23 +1,30 @@
 <?xml version='1.0'?>
-<sdf version='1.4'>
-  <model name="cone_orange_big">
-    <link name="link">
-      <collision name="collision">
-        <geometry>
-          <mesh>
-            <uri>model://fssim_gazebo/meshes/cone/cone_orange_big.dae</uri>
-     	      <scale>1 1 1</scale>
-          </mesh>
-        </geometry>
-      </collision>
-      <visual name="visual">
-        <geometry>
-          <mesh>
-            <uri>model://fssim_gazebo/meshes/cone/cone_orange_big.dae</uri>
-            <scale>1 1 1</scale>
-          </mesh>
-        </geometry>
-      </visual>
-    </link>
+<sdf version='1.6'>
+	<model name="cone_orange_big">
+	<static>true</static>
+	<link name="link">
+		<inertial>
+			<pose>0.0 0.0 0.20 0 0 0</pose>
+			<mass>1.200</mass>
+		</inertial>
+		<collision name="collision">
+			<pose>0.0 0.0 0.25 0 0 0</pose>
+			<geometry>
+				<mesh>
+					<uri>model://cone_orange_big/material/meshes/cone_orange_big.dae</uri>
+					<scale>1 1 1</scale>
+				</mesh>
+			</geometry>
+		</collision>
+		<visual name="visual">
+			<pose>0.0 0.0 0.25 0 0 0</pose>
+			<geometry>
+				<mesh>
+					<uri>model://cone_orange_big/material/meshes/cone_orange_big.dae</uri>
+					<scale>1 1 1</scale>
+				</mesh>
+			</geometry>
+		</visual>
+	</link>
   </model>
 </sdf>

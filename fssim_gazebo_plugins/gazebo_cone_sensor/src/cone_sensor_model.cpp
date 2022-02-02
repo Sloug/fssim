@@ -114,8 +114,12 @@ bool ConeSensorModel::load(const physics::ModelPtr &model, const sdf::ElementPtr
     pub_markers_ = nh_.advertise<visualization_msgs::MarkerArray>("cone_sensor", 1);
 
     parent_model_ = model;
-    model_        = model->GetWorld()->GetModel("track");
-    if (model_ == nullptr) { return false; }
+    //model_        = model->GetWorld()->GetModel("track");
+    model_        = model->GetWorld()->ModelByName("track");
+    if (model_ == nullptr) { 
+	    ROS_ERROR("No model 'track'!");
+	    return false; 
+    }
 
     vehicle_frame_ = _sdf->Get<std::string>("base_link");
 
@@ -174,7 +178,8 @@ bool ConeSensorModel::checkInit() {
     if (loaded_sacesfully_) { return true; }
 
     parent_model_->Reset();
-    model_ = parent_model_->GetWorld()->GetModel("track");
+    //model_ = parent_model_->GetWorld()->GetModel("track");
+    model_ = parent_model_->GetWorld()->ModelByName("track");
     if (model_ == NULL) {
         ROS_ERROR("ConeSensorModel: DID NOT FIND MODEL");
         return false;
@@ -195,11 +200,14 @@ void ConeSensorModel::updateTrack() {
         const auto child  = model_->GetChild(i);
         const auto entity = boost::dynamic_pointer_cast<gazebo::physics::Entity>(child);
 
-        if (entity->GetName() == "cone_left::link") {
+        // if (entity->GetName() == "cone_left::link") {
+        if (entity->GetName().find("cone_left_") != std::string::npos) {
             left_.push_back(entity);
-        } else if (entity->GetName() == "cone_right::link") {
+        // } else if (entity->GetName() == "cone_right::link") {
+        } else if (entity->GetName().find("cone_right_") != std::string::npos) {
             right_.push_back(entity);
-        } else if (entity->GetName() == "cone_orange::link" or entity->GetName() == "cone_orange_big::link") {
+        // } else if (entity->GetName() == "cone_orange::link" or entity->GetName() == "cone_orange_big::link") {
+        } else if (entity->GetName().find("cone_orange_") != std::string::npos) {
             orange_.push_back(entity);
         }
     }

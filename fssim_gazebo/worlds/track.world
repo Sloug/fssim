@@ -43,9 +43,9 @@
 
         <spherical_coordinates>
             <surface_model>EARTH_WGS84</surface_model>
-            <latitude_deg>0</latitude_deg>
-            <longitude_deg>0</longitude_deg>
-            <elevation>0</elevation>
+            <latitude_deg>47.659216</latitude_deg>
+            <longitude_deg>9.175072</longitude_deg>
+            <elevation>404</elevation>
             <heading_deg>0</heading_deg>
         </spherical_coordinates>
 
@@ -66,7 +66,7 @@
         </include>
 
         <include>
-          <uri>model://fssim_gazebo/models/track</uri>
+          <uri>model://track</uri>
           <pose>0 0 0 0 0 0</pose>
           <name>track</name>
         </include>      

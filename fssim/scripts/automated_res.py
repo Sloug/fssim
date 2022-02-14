@@ -242,7 +242,7 @@ class AutomatedRes:
             try:
                 rate.sleep()
             except:
-                print "ROSCORE has been killed during sleep"
+                print("ROSCORE has been killed during sleep")
 
         # Write statisctics into a file
         self.statistics.write_report(self.sim_config_id, self.ecu.state == EcuState.FINNISHED_DISCIPLINE)
@@ -258,7 +258,7 @@ class AutomatedRes:
     def sim_time_expired(self):
         time_expired = False
         repetition_time = rospy.Time.now().to_sec() - self.start_time
-        if 'kill_after' in self.sim_config and self.sim_config['kill_after'] is not 0:
+        if 'kill_after' in self.sim_config and self.sim_config['kill_after'] != 0:
             if self.sim_health.vehicle_started and repetition_time > self.sim_config['kill_after']:
                 time_expired = True
                 rospy.logerr("Simulation Time EXPIRED with: %f", repetition_time)
@@ -441,7 +441,7 @@ def start_roscore():
     except socket.error:
         roscore.run()
         time.sleep(1.0)  # wait a bit to be sure the roscore is really launched
-        print '\033[93m', "ROSCORE STARTED HERE", '\033[0m'
+        print('\033[93m', "ROSCORE STARTED HERE", '\033[0m')
     return roscore
 
 
@@ -471,4 +471,4 @@ if __name__ == '__main__':
 
     roscore.ensure_terminated()
 
-    print "THIS REPETITION IS OVER"
+    print("THIS REPETITION IS OVER")

@@ -44,7 +44,7 @@ find_package(catkin REQUIRED COMPONENTS
         visualization_msgs
 	)
 
-find_package(gazebo 9 REQUIRED)
+find_package(gazebo 11 REQUIRED)
 find_package(PCL REQUIRED)
 find_package(Boost REQUIRED COMPONENTS thread)
 
